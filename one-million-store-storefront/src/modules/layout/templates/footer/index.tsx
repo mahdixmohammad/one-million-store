@@ -14,20 +14,20 @@ export default async function Footer() {
   return (
     <footer className="border-t border-ui-border-base w-full">
       <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
+        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-16">
           <div>
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+              className="text-2xl text-black font-bold"
             >
-              Medusa Store
+              1Million
             </LocalizedClientLink>
           </div>
           <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
             {productCategories && productCategories?.length > 0 && (
               <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
+                <span className="text-sm font-bold">
+                  SHOP
                 </span>
                 <ul
                   className="grid grid-cols-1 gap-2"
@@ -47,13 +47,13 @@ export default async function Footer() {
 
                     return (
                       <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
+                        className="flex flex-col gap-2 text-sm"
                         key={c.id}
                       >
                         <LocalizedClientLink
                           className={clx(
                             "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
+                            children && "text-sm text-ui-fg-subtle"
                           )}
                           href={`/categories/${c.handle}`}
                           data-testid="category-link"
@@ -109,8 +109,8 @@ export default async function Footer() {
               </div>
             )}
             <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
+              <span className="text-sm font-bold">SUPPORT</span>
+              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle text-sm">
                 <li>
                   <a
                     href="https://github.com/medusajs"
@@ -118,7 +118,7 @@ export default async function Footer() {
                     rel="noreferrer"
                     className="hover:text-ui-fg-base"
                   >
-                    GitHub
+                    Contact Us
                   </a>
                 </li>
                 <li>
@@ -128,7 +128,7 @@ export default async function Footer() {
                     rel="noreferrer"
                     className="hover:text-ui-fg-base"
                   >
-                    Documentation
+                    Privacy Policy
                   </a>
                 </li>
                 <li>
@@ -138,18 +138,27 @@ export default async function Footer() {
                     rel="noreferrer"
                     className="hover:text-ui-fg-base"
                   >
-                    Source code
+                    Delivery Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/medusajs/nextjs-starter-medusa"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-ui-fg-base"
+                  >
+                    Return Policy
                   </a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
+        <div className="flex w-full mb-6 justify-between text-ui-fg-muted">
           <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
+            © {new Date().getFullYear()} Future Gulf Company. All rights reserved.
           </Text>
-          <MedusaCTA />
         </div>
       </div>
     </footer>
