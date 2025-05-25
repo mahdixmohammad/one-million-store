@@ -14,7 +14,7 @@ export default async function Footer() {
   return (
     <footer className="border-t border-ui-border-base w-full">
       <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-16">
+        <div className="flex flex-col gap-y-6 2xsmall:flex-row items-start justify-between py-16">
           <div>
             <LocalizedClientLink
               href="/"
@@ -79,32 +79,6 @@ export default async function Footer() {
                       </li>
                     )
                   })}
-                </ul>
-              </div>
-            )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
-                >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
                 </ul>
               </div>
             )}
