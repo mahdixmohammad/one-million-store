@@ -8,9 +8,11 @@ import { HttpTypes } from "@medusajs/types"
 const CartTemplate = ({
   cart,
   customer,
+  region,
 }: {
   cart: HttpTypes.StoreCart | null
   customer: HttpTypes.StoreCustomer | null
+  region: HttpTypes.StoreRegion
 }) => {
   return (
     <div className="py-12">
@@ -24,7 +26,7 @@ const CartTemplate = ({
                   <Divider />
                 </>
               )}
-              <ItemsTemplate cart={cart} />
+              <ItemsTemplate cart={cart} region={region} />
             </div>
             <div className="relative">
               <div className="flex flex-col gap-y-8 sticky top-12">

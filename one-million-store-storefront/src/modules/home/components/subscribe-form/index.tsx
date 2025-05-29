@@ -2,7 +2,13 @@
 
 import { useState } from 'react';
 
-export default function SubscribeForm() {
+export default function SubscribeForm({
+  translations
+}: {
+  translations: {
+    subscribeForm: { heading: string; description: string; form: string; button: string }
+  }
+}) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState(null);
 
@@ -28,16 +34,18 @@ export default function SubscribeForm() {
     }
   };
 
+  const { subscribeForm } = translations
+
   return (
     <div className="bg-white px-6 py-8 rounded-md shadow-md max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-2 text-center">Be The First To Know</h2>
-      <p className="text-gray-600 mb-4">Get notified about new product releases and exclusive promotions.</p>
+      <h2 className="text-xl font-bold mb-2 text-center">{subscribeForm.heading}</h2>
+      <p className="text-gray-600 mb-4">{subscribeForm.description}</p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email address"
+          placeholder={subscribeForm.form}
           className="border px-4 py-2 rounded w-full"
           required
         />
@@ -45,7 +53,7 @@ export default function SubscribeForm() {
           type="submit"
           className="bg-[#E5C887] hover:bg-yellow-600 text-black py-2 px-4 rounded"
         >
-          Subscribe
+          {subscribeForm.button}
         </button>
       </form>
       {status === 'success' && <p className="text-green-600 mt-2">Thank you for subscribing!</p>}

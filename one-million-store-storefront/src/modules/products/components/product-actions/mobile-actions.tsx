@@ -21,6 +21,7 @@ type MobileActionsProps = {
   isAdding?: boolean
   show: boolean
   optionsDisabled: boolean
+  region: HttpTypes.StoreRegion
 }
 
 const MobileActions: React.FC<MobileActionsProps> = ({
@@ -33,6 +34,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   isAdding,
   show,
   optionsDisabled,
+  region,
 }) => {
   const { state, open, close } = useToggleState()
 
@@ -51,6 +53,20 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   }, [price])
 
   const isSimple = isSimpleProduct(product)
+
+  const localizedTitle = product.title
+    .split("#")
+    .reduce((acc, part) => {
+      const [key, value] = part.split(":").map((s) => s.trim())
+      if (key && value) acc[key] = value
+      return acc
+    }, {} as Record<string, string>)
+
+  const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+  const title =
+    localizedTitle[regionLang] ||
+    localizedTitle["en"] ||
+    product.title
 
   return (
     <>
@@ -74,7 +90,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
             data-testid="mobile-actions"
           >
             <div className="flex items-center gap-x-2">
-              <span data-testid="mobile-title">{product.title}</span>
+              <span data-testid="mobile-title">{title}</span>
               <span>—</span>
               {selectedPrice ? (
                 <div className="flex items-end gap-x-2 text-ui-fg-base">

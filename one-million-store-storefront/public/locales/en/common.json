@@ -1,7 +1,23 @@
 {
+  "sideMenu": {
+    "home": "Home",
+    "store": "Store",
+    "account": "Account",
+    "cart": "Cart"
+  },
   "hero": {
     "welcome": "One Million Store",
     "description": "Discover the world’s best coffee, delivered to your door. Freshly roasted, ethically sourced, and always delicious.",
     "shopNow": "Shop Now"
+  },
+  "featuredProducts": {
+    "heading": "Featured Products",
+    "viewAll": "View All"
+  },
+  "subscribeForm": {
+    "heading": "Be The First To Know",
+    "description": "Get notified about new product releases and exclusive promotions.",
+    "form": "Email address",
+    "button": "Subscribe"
   }
 }

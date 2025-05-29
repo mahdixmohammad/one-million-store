@@ -68,12 +68,24 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     notFound()
   }
 
+  const localizedTitle = product.title
+    .split("#")
+    .reduce((acc, part) => {
+      const [key, value] = part.split(":").map((s) => s.trim())
+      if (key && value) acc[key] = value
+      return acc
+    }, {} as Record<string, string>)
+
+  const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+  const title =
+    localizedTitle[regionLang] || localizedTitle["en"] || product.title
+
   return {
-    title: `${product.title} | Medusa Store`,
-    description: `${product.title}`,
+    title: `${title} | Medusa Store`,
+    description: `${title}`,
     openGraph: {
-      title: `${product.title} | Medusa Store`,
-      description: `${product.title}`,
+      title: `${title} | Medusa Store`,
+      description: `${title}`,
       images: product.thumbnail ? [product.thumbnail] : [],
     },
   }
@@ -95,6 +107,18 @@ export default async function ProductPage(props: Props) {
   if (!pricedProduct) {
     notFound()
   }
+
+  const localizedTitle = pricedProduct.title
+    .split("#")
+    .reduce((acc, part) => {
+      const [key, value] = part.split(":").map((s) => s.trim())
+      if (key && value) acc[key] = value
+      return acc
+    }, {} as Record<string, string>)
+
+  const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+  const title =
+    localizedTitle[regionLang] || localizedTitle["en"] || pricedProduct.title
 
   return (
     <ProductTemplate

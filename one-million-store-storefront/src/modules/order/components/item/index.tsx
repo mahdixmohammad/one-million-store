@@ -9,9 +9,22 @@ import Thumbnail from "@modules/products/components/thumbnail"
 type ItemProps = {
   item: HttpTypes.StoreCartLineItem | HttpTypes.StoreOrderLineItem
   currencyCode: string
+  region: HttpTypes.StoreRegion
 }
 
-const Item = ({ item, currencyCode }: ItemProps) => {
+const Item = ({ item, currencyCode, region }: ItemProps) => {
+  const localizedTitle = (item.product_title ?? "")
+    .split("#")
+    .reduce((acc, part) => {
+      const [key, value] = part.split(":").map((s) => s.trim())
+      if (key && value) acc[key] = value
+      return acc
+    }, {} as Record<string, string>)
+
+  const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+  const title =
+    localizedTitle[regionLang] || localizedTitle["en"] || item.product_title
+
   return (
     <Table.Row className="w-full" data-testid="product-row">
       <Table.Cell className="!pl-0 p-4 w-24">
@@ -25,7 +38,7 @@ const Item = ({ item, currencyCode }: ItemProps) => {
           className="txt-medium-plus text-ui-fg-base"
           data-testid="product-name"
         >
-          {item.product_title}
+          {title}
         </Text>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
       </Table.Cell>

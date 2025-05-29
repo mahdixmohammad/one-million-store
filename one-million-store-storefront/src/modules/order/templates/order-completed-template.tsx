@@ -12,10 +12,12 @@ import { HttpTypes } from "@medusajs/types"
 
 type OrderCompletedTemplateProps = {
   order: HttpTypes.StoreOrder
+  region: HttpTypes.StoreRegion
 }
 
 export default async function OrderCompletedTemplate({
   order,
+  region,
 }: OrderCompletedTemplateProps) {
   const cookies = await nextCookies()
 
@@ -36,11 +38,11 @@ export default async function OrderCompletedTemplate({
             <span>Thank you!</span>
             <span>Your order was placed successfully.</span>
           </Heading>
-          <OrderDetails order={order} />
+          <OrderDetails order={order} region={region} />
           <Heading level="h2" className="flex flex-row text-3xl-regular">
             Summary
           </Heading>
-          <Items order={order} />
+          <Items order={order} region={region} />
           <CartTotals totals={order} />
           <ShippingDetails order={order} />
           <PaymentDetails order={order} />

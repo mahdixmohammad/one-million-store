@@ -28,6 +28,17 @@ export default async function ProductPreview({
     product,
   })
 
+  const localizedTitle = product.title
+    .split("#")
+    .reduce((acc, part) => {
+      const [key, value] = part.split(":").map((s) => s.trim())
+      if (key && value) acc[key] = value
+      return acc
+    }, {} as Record<string, string>)
+
+  const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+  const title = localizedTitle[regionLang] || localizedTitle["en"] || product.title
+
   return (
     <LocalizedClientLink href={`/products/${product.handle}`} className="group">
       <div data-testid="product-wrapper">
@@ -39,7 +50,7 @@ export default async function ProductPreview({
         />
         <div className="flex flex-col 2xsmall:flex-row txt-compact-medium mt-4 justify-between">
           <Text className="text-ui-fg-subtle" data-testid="product-title">
-            {product.title}
+            {title}
           </Text>
           <div className="flex items-center gap-x-2">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}

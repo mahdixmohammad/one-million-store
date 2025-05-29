@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import path from "path"
 import fs from "fs/promises"
 
@@ -65,10 +64,10 @@ export default async function Home(props: { params?: { countryCode?: string } })
     <>
       <Hero translations={translations} />
       <ul className="flex flex-col gap-x-6">
-        <FeaturedProducts collections={collections} region={region} />
+        <FeaturedProducts translations={translations} collections={collections} region={region} />
       </ul>
       <div className="mt-20 mb-36">
-        <SubscribeForm />
+        <SubscribeForm translations={translations} />
       </div>
     </>
   )

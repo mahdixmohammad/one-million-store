@@ -74,6 +74,21 @@ const CartDropdown = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalItems, itemRef.current])
 
+  const getLocalizedTitle = (title: string, regionLang: string) => {
+    const localizedTitle = title
+      .split("#")
+      .reduce((acc, part) => {
+        const [key, value] = part.split(":").map((s) => s.trim())
+        if (key && value) acc[key] = value
+        return acc
+      }, {} as Record<string, string>)
+
+    return localizedTitle[regionLang] || localizedTitle["en"] || title
+  }
+
+  const regionLang =
+    cartState?.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+
   return (
     <div
       className="h-full z-50"
@@ -87,9 +102,14 @@ const CartDropdown = ({
             href="/cart"
             data-testid="nav-cart-link"
           >
-            <Image src="/images/cart-icon.png" alt="Logo" width={30} height={30}></Image>
+            <Image
+              src="/images/cart-icon.png"
+              alt="Logo"
+              width={30}
+              height={30}
+            ></Image>
             <p className="absolute bg-black rounded-full px-[5px] py-[0.5px] text-xs left-[17px] top-[12px] text-white font-bold z-10">{`${totalItems}`}</p>
-            </LocalizedClientLink>
+          </LocalizedClientLink>
         </PopoverButton>
         <Transition
           show={cartDropdownOpen}
@@ -120,7 +140,7 @@ const CartDropdown = ({
                     })
                     .map((item) => (
                       <div
-                        className="grid grid-cols-[122px_1fr] gap-x-4"
+                        className="grid grid-cols-[122px_1fr] gap-x-0"
                         key={item.id}
                         data-testid="cart-item"
                       >
@@ -137,13 +157,13 @@ const CartDropdown = ({
                         <div className="flex flex-col justify-between flex-1">
                           <div className="flex flex-col flex-1">
                             <div className="flex items-start justify-between">
-                              <div className="flex flex-col overflow-ellipsis whitespace-nowrap mr-4 w-[180px]">
+                              <div className="flex flex-col overflow-ellipsis whitespace-nowrap mr-4 w-[160px]">
                                 <h3 className="text-base-regular overflow-hidden text-ellipsis">
                                   <LocalizedClientLink
                                     href={`/products/${item.product_handle}`}
                                     data-testid="product-link"
                                   >
-                                    {item.title}
+                                    {getLocalizedTitle(item.title, regionLang)}
                                   </LocalizedClientLink>
                                 </h3>
                                 <LineItemOptions

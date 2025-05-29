@@ -10,15 +10,19 @@ import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
 
-const SideMenuItems = {
-  Home: "/",
-  Store: "/store",
-  Account: "/account",
-  Cart: "/cart",
-}
 
-const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
+
+const SideMenu = ({ translations, regions }: { translations: {sideMenu: {home: string; store: string; account: string; cart: string}}; regions: HttpTypes.StoreRegion[] | null }) => {
   const toggleState = useToggleState()
+
+  const {sideMenu} = translations
+
+  const SideMenuItems = {
+    [sideMenu.home]: "/",
+    [sideMenu.store]: "/store",
+    [sideMenu.account]: "/account",
+    [sideMenu.cart]: "/cart",
+  }
 
   return (
     <div className="h-full">

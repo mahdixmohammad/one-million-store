@@ -6,12 +6,16 @@ import InteractiveLink from "@modules/common/components/interactive-link"
 import ProductPreview from "@modules/products/components/product-preview"
 
 export default async function ProductRail({
+  translations,
   collection,
   region,
 }: {
+  translations: {featuredProducts: {heading: string, viewAll: string}},
   collection: HttpTypes.StoreCollection
   region: HttpTypes.StoreRegion
 }) {
+  const { featuredProducts } = translations
+
   const {
     response: { products: pricedProducts },
   } = await listProducts({
@@ -29,9 +33,9 @@ export default async function ProductRail({
   return (
     <div className="content-container py-12">
       <div className="flex justify-between mb-8">
-        <Text className="text-2xl">Featured Products</Text>
+        <Text className="text-2xl">{featuredProducts.heading}</Text>
         <InteractiveLink href={`/store`}>
-          View all
+          {featuredProducts.viewAll}
         </InteractiveLink>
       </div>
       <ul className="grid grid-cols-2 xsmall:grid-cols-3 small:grid-cols-5 gap-x-6 gap-y-6 small:gap-y-36">

@@ -18,9 +18,10 @@ type ItemProps = {
   item: HttpTypes.StoreCartLineItem
   type?: "full" | "preview"
   currencyCode: string
+  region: HttpTypes.StoreRegion
 }
 
-const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
+const Item = ({ item, type = "full", currencyCode, region }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -39,6 +40,20 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         setUpdating(false)
       })
   }
+
+  const localizedTitle = (item.product_title || "")
+    .split("#")
+    .reduce((acc, part) => {
+      const [key, value] = part.split(":").map((s) => s.trim())
+      if (key && value) acc[key] = value
+      return acc
+    }, {} as Record<string, string>)
+
+  const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+  const title =
+    localizedTitle[regionLang] ||
+    localizedTitle["en"] ||
+    item.product_title
 
   // TODO: Update this to grab the actual max inventory
   const maxQtyFromInventory = 10
@@ -67,7 +82,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           className="txt-medium-plus text-ui-fg-base"
           data-testid="product-title"
         >
-          {item.product_title}
+          {title}
         </Text>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
       </Table.Cell>

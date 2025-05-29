@@ -1,4 +1,5 @@
 import { retrieveOrder } from "@lib/data/orders"
+import { retrieveRegion } from "@lib/data/regions"
 import OrderCompletedTemplate from "@modules/order/templates/order-completed-template"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
@@ -19,5 +20,7 @@ export default async function OrderConfirmedPage(props: Props) {
     return notFound()
   }
 
-  return <OrderCompletedTemplate order={order} />
+  const region = await retrieveRegion(order.region_id || "default-region-id")
+
+  return <OrderCompletedTemplate order={order} region={region} />
 }
