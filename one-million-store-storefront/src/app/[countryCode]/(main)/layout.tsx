@@ -48,7 +48,7 @@ export default async function PageLayout(props: {
 
   return (
     <>
-      <Nav translations={translations} />
+      <Nav translations={translations} countryCode={countryCode} />
       {customer && cart && (
         <CartMismatchBanner customer={customer} cart={cart} />
       )}

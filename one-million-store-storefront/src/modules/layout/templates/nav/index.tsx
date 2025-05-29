@@ -6,9 +6,11 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import Image from "next/image"
+import RegionDropdown from "@modules/layout/components/region-dropdown"
 
-export default async function Nav({ translations }: { translations: {sideMenu: {home: string; store: string; account: string; cart: string}}; }) {
-  const regions = await listRegions().then((regions: StoreRegion[]) => regions)
+export default async function Nav({ translations, countryCode }: { translations: {sideMenu: {home: string; store: string; account: string; cart: string}}, countryCode: string }) {
+
+  const regions = await listRegions().then((regions: StoreRegion[]) => regions);
 
   return (
     <div dir="ltr" className="sticky top-0 inset-x-0 z-50 group">
@@ -31,7 +33,8 @@ export default async function Nav({ translations }: { translations: {sideMenu: {
           </div>
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full">
+            <RegionDropdown countryCode={countryCode} regions={regions}/>
+            <div className="hidden 2xsmall:flex items-center gap-x-6 h-full">
               <LocalizedClientLink
                 className="hover:text-ui-fg-base"
                 href="/account"
@@ -57,5 +60,5 @@ export default async function Nav({ translations }: { translations: {sideMenu: {
         </nav>
       </header>
     </div>
-  )
+  );
 }
