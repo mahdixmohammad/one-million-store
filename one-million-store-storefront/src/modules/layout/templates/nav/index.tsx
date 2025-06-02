@@ -9,7 +9,6 @@ import Image from "next/image"
 import RegionDropdown from "@modules/layout/components/region-dropdown"
 
 export default async function Nav({ translations, countryCode }: { translations: {sideMenu: {home: string; store: string; account: string; cart: string}}, countryCode: string }) {
-
   const regions = await listRegions().then((regions: StoreRegion[]) => regions);
 
   return (

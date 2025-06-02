@@ -12,6 +12,27 @@ type SummaryProps = {
   cart: HttpTypes.StoreCart & {
     promotions: HttpTypes.StorePromotion[]
   }
+  translations: {
+    cartSummary: {
+      summary: string
+      goToCheckout: string
+    }
+    discountCode: {
+      addButton: string
+      applyButton: string
+      appliedHeading: string
+      removeSr: string
+    }
+    cartTotals: {
+      subtotal: string
+      discount: string
+      shipping: string
+      taxes: string
+      giftCard: string
+      total: string
+    }
+    [key: string]: any
+  }
 }
 
 function getCheckoutStep(cart: HttpTypes.StoreCart) {
@@ -24,22 +45,22 @@ function getCheckoutStep(cart: HttpTypes.StoreCart) {
   }
 }
 
-const Summary = ({ cart }: SummaryProps) => {
+const Summary = ({ cart, translations }: SummaryProps) => {
   const step = getCheckoutStep(cart)
 
   return (
     <div className="flex flex-col gap-y-4">
       <Heading level="h2" className="text-[2rem] leading-[2.75rem]">
-        Summary
+        {translations.cartSummary.summary}
       </Heading>
-      <DiscountCode cart={cart} />
+      <DiscountCode cart={cart} translations={translations} />
       <Divider />
-      <CartTotals totals={cart} />
+      <CartTotals totals={cart} translations={translations} />
       <LocalizedClientLink
         href={"/checkout?step=" + step}
         data-testid="checkout-button"
       >
-        <Button className="w-full h-10">Go to checkout</Button>
+        <Button className="w-full h-10">{translations.cartSummary.goToCheckout}</Button>
       </LocalizedClientLink>
     </div>
   )

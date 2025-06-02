@@ -8,26 +8,37 @@ import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item"
 type ItemsTemplateProps = {
   cart?: HttpTypes.StoreCart
   region: HttpTypes.StoreRegion
+  translations: {
+    cartTable: {
+      cart: string
+      item: string
+      quantity: string
+      price: string
+      total: string
+    }
+    // Add fallback for other translation sections
+    [key: string]: any
+  }
 }
 
-const ItemsTemplate = ({ cart, region }: ItemsTemplateProps) => {
+const ItemsTemplate = ({ cart, region, translations }: ItemsTemplateProps) => {
   const items = cart?.items
   return (
     <div>
       <div className="pb-3 flex items-center">
-        <Heading className="text-[2rem] leading-[2.75rem]">Cart</Heading>
+        <Heading className="text-[2rem] leading-[2.75rem]">{translations.cartTable.cart}</Heading>
       </div>
-      <Table>
+      <Table  dir="ltr">
         <Table.Header className="border-t-0">
           <Table.Row className="text-ui-fg-subtle txt-medium-plus">
-            <Table.HeaderCell className="!pl-0">Item</Table.HeaderCell>
+            <Table.HeaderCell className="!pl-0">{translations.cartTable.item}</Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
-            <Table.HeaderCell>Quantity</Table.HeaderCell>
+            <Table.HeaderCell>{translations.cartTable.quantity}</Table.HeaderCell>
             <Table.HeaderCell className="hidden small:table-cell">
-              Price
+              {translations.cartTable.price}
             </Table.HeaderCell>
             <Table.HeaderCell className="!pr-0 text-right">
-              Total
+              {translations.cartTable.total}
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>

@@ -13,14 +13,15 @@ import { HttpTypes } from "@medusajs/types"
 type OrderCompletedTemplateProps = {
   order: HttpTypes.StoreOrder
   region: HttpTypes.StoreRegion
+  translations: any // Add translations prop
 }
 
 export default async function OrderCompletedTemplate({
   order,
   region,
+  translations,
 }: OrderCompletedTemplateProps) {
   const cookies = await nextCookies()
-
   const isOnboarding = cookies.get("_medusa_onboarding")?.value === "true"
 
   return (
@@ -35,15 +36,20 @@ export default async function OrderCompletedTemplate({
             level="h1"
             className="flex flex-col gap-y-3 text-ui-fg-base text-3xl mb-4"
           >
-            <span>Thank you!</span>
-            <span>Your order was placed successfully.</span>
+            <span>{translations?.orderComplete?.thankYou || "Thank you!"}</span>
+            <span>
+              {
+                translations?.orderComplete?.successMessage ||
+                "Your order was placed successfully."
+              }
+            </span>
           </Heading>
-          <OrderDetails order={order} region={region} />
+          <OrderDetails order={order} />
           <Heading level="h2" className="flex flex-row text-3xl-regular">
-            Summary
+            {translations?.cartSummary?.summary || "Summary"}
           </Heading>
           <Items order={order} region={region} />
-          <CartTotals totals={order} />
+          <CartTotals totals={order} translations={translations} />
           <ShippingDetails order={order} />
           <PaymentDetails order={order} />
           <Help />

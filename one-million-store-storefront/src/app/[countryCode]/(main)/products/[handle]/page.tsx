@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import { listProducts } from "@lib/data/products"
 import { getRegion, listRegions } from "@lib/data/regions"
 import ProductTemplate from "@modules/products/templates"
+import path from "path"
+import fs from "fs/promises"
 
 type Props = {
   params: Promise<{ countryCode: string; handle: string }>
@@ -81,14 +83,26 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     localizedTitle[regionLang] || localizedTitle["en"] || product.title
 
   return {
-    title: `${title} | Medusa Store`,
+    title: `${title} | One Million Store`,
     description: `${title}`,
     openGraph: {
-      title: `${title} | Medusa Store`,
+      title: `${title} | One Million Store`,
       description: `${title}`,
       images: product.thumbnail ? [product.thumbnail] : [],
     },
   }
+}
+
+async function loadTranslations(locale: string) {
+  const filePath = path.join(
+    process.cwd(),
+    "public",
+    "locales",
+    locale,
+    "common.json"
+  )
+  const fileContents = await fs.readFile(filePath, "utf-8")
+  return JSON.parse(fileContents)
 }
 
 export default async function ProductPage(props: Props) {
@@ -108,23 +122,15 @@ export default async function ProductPage(props: Props) {
     notFound()
   }
 
-  const localizedTitle = pricedProduct.title
-    .split("#")
-    .reduce((acc, part) => {
-      const [key, value] = part.split(":").map((s) => s.trim())
-      if (key && value) acc[key] = value
-      return acc
-    }, {} as Record<string, string>)
-
   const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
-  const title =
-    localizedTitle[regionLang] || localizedTitle["en"] || pricedProduct.title
+  const translations = await loadTranslations(regionLang)
 
   return (
     <ProductTemplate
       product={pricedProduct}
       region={region}
       countryCode={params.countryCode}
+      translations={translations}
     />
   )
 }

@@ -19,5 +19,97 @@
     "description": "Get notified about new product releases and exclusive promotions.",
     "form": "Email address",
     "button": "Subscribe"
+  },
+  "productTabs": {
+    "productInfo": "Product Information",
+    "shippingReturns": "Shipping & Returns",
+    "material": "Material",
+    "countryOfOrigin": "Country of origin",
+    "type": "Type",
+    "weight": "Weight",
+    "dimensions": "Dimensions",
+    "fastDelivery": "Fast delivery",
+    "fastDeliveryDesc": "Your package will arrive in 3-5 business days at your pick up location or in the comfort of your home.",
+    "simpleExchanges": "Simple exchanges",
+    "simpleExchangesDesc": "Is the fit not quite right? No worries - we'll exchange your product for a new one.",
+    "easyReturns": "Easy returns",
+    "easyReturnsDesc": "Just return your product and we'll refund your money. No questions asked – we'll do our best to make sure your return is hassle-free."
+  },
+  "cartTable": {
+  "cart": "Cart",
+  "item": "Item",
+  "quantity": "Quantity",
+  "price": "Price",
+  "total": "Total"
+  },
+  "cartSummary": {
+    "summary": "Summary",
+    "goToCheckout": "Go to checkout"
+  },
+  "emptyCart": {
+    "heading": "Cart",
+    "message": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+    "explore": "Explore products"
+  },
+  "signInPrompt": {
+    "heading": "Already have an account?",
+    "message": "Sign in for a better experience.",
+    "button": "Sign in"
+  },
+  "discountCode": {
+    "addButton": "Add Promotion Code(s)",
+    "applyButton": "Apply",
+    "appliedHeading": "Promotion(s) applied:",
+    "removeSr": "Remove discount code from order"
+  },
+  "cartTotals": {
+    "subtotal": "Subtotal (excl. shipping and taxes)",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "taxes": "Taxes",
+    "giftCard": "Gift card",
+    "total": "Total"
+  },
+  "shippingAddress": {
+    "heading": "Shipping Address",
+    "continueButton": "Continue to delivery",
+    "country": "Country",
+    "savedPrompt": "Hi {name}, do you want to use one of your saved addresses?",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "address1": "Address",
+    "company": "Company",
+    "postalCode": "Postal code",
+    "city": "City",
+    "province": "State / Province",
+    "billingSameAsShipping": "Billing address same as shipping address",
+    "email": "Email",
+    "emailTitle": "Enter a valid email address.",
+    "phone": "Phone",
+    "billingAddress": "Billing Address",
+    "contact": "Contact",
+    "shippingAddress": "Shipping Address",
+    "shippingMethod": "Shipping method",
+    "howToDeliver": "How would you like your order delivered",
+    "store": "Store",
+    "chooseStore": "Choose a store near you",
+    "method": "Method",
+    "continueToPayment": "Continue to payment",
+    "delivery": "Delivery",
+    "edit": "Edit"
+  },
+  "checkoutNav": {
+    "backToCart": "Back to shopping cart",
+    "back": "Back",
+    "storeName": "1Million"
+  },
+  "review": {
+    "heading": "Review",
+    "terms": "By clicking the Place Order button, you confirm that you have read, understand and accept our Terms of Use, Terms of Sale and Returns Policy and acknowledge that you have read One Million Store's Privacy Policy.",
+    "placeOrder": "Place order"
+  },
+  "orderComplete": {
+    "thankYou": "Thank you!",
+    "successMessage": "Your order was placed successfully."
   }
 }

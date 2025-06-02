@@ -1,6 +1,6 @@
 import { retrieveCart } from "@lib/data/cart"
 import { retrieveCustomer } from "@lib/data/customer"
-import { retrieveRegion } from "@lib/data/regions"
+import { listRegions, retrieveRegion } from "@lib/data/regions"
 import CartTemplate from "@modules/cart/templates"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
@@ -10,14 +10,20 @@ export const metadata: Metadata = {
   description: "View your cart",
 }
 
-export default async function Cart() {
+export default async function Cart({ params }: { params: { countryCode: string } }) {
   const cart = await retrieveCart().catch((error) => {
     console.error(error)
     return notFound()
   })
 
   const customer = await retrieveCustomer()
-  const region = await retrieveRegion(cart?.region_id || "default-region-id")
 
-  return <CartTemplate cart={cart} customer={customer} region={region} />
+  let regionId = cart?.region_id
+  if (!regionId) {
+    const regions = await listRegions()
+    regionId = regions?.[0]?.id
+  }
+  const region = await retrieveRegion(regionId)
+
+  return <CartTemplate cart={cart} customer={customer} region={region} countryCode={params.countryCode} />
 }

@@ -119,7 +119,16 @@ const Payment = ({
             }
           )}
         >
-          Payment
+          {(() => {
+            const title = "#en:Payment#ar:الدفع"
+            const localized = title.split("#").reduce((acc, part) => {
+              const [key, value] = part.split(":").map((s) => s.trim())
+              if (key && value) acc[key] = value
+              return acc
+            }, {} as Record<string, string>)
+            const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+            return localized[regionLang] || localized["en"] || "Payment"
+          })()}
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
@@ -129,7 +138,16 @@ const Payment = ({
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               data-testid="edit-payment-button"
             >
-              Edit
+              {(() => {
+                const title = "#en:No#ar:تعديل"
+                const localized = title.split("#").reduce((acc, part) => {
+                  const [key, value] = part.split(":").map((s) => s.trim())
+                  if (key && value) acc[key] = value
+                  return acc
+                }, {} as Record<string, string>)
+                const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                return localized[regionLang] || localized["en"] || "Edit"
+              })()}
             </button>
           </Text>
         )}
@@ -169,13 +187,17 @@ const Payment = ({
           {paidByGiftcard && (
             <div className="flex flex-col w-1/3">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment method
-              </Text>
-              <Text
-                className="txt-medium text-ui-fg-subtle"
-                data-testid="payment-method-summary"
-              >
-                Gift card
+                {(() => {
+                  // For gift card summary
+                  const title = "Gift card"
+                  const localized = title.split("#").reduce((acc, part) => {
+                    const [key, value] = part.split(":").map((s) => s.trim())
+                    if (key && value) acc[key] = value
+                    return acc
+                  }, {} as Record<string, string>)
+                  const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                  return localized[regionLang] || localized["en"] || title
+                })()}
               </Text>
             </div>
           )}
@@ -196,9 +218,27 @@ const Payment = ({
             }
             data-testid="submit-payment-button"
           >
-            {!activeSession && isStripeFunc(selectedPaymentMethod)
-              ? " Enter card details"
-              : "Continue to review"}
+            {(() => {
+              if (!activeSession && isStripeFunc(selectedPaymentMethod)) {
+                const title = "#en:Enter card details#ar:أدخل تفاصيل البطاقة"
+                const localized = title.split("#").reduce((acc, part) => {
+                  const [key, value] = part.split(":").map((s) => s.trim())
+                  if (key && value) acc[key] = value
+                  return acc
+                }, {} as Record<string, string>)
+                const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                return localized[regionLang] || localized["en"] || title
+              } else {
+                const title = "#en:Continue to review#ar:المتابعة للمراجعة"
+                const localized = title.split("#").reduce((acc, part) => {
+                  const [key, value] = part.split(":").map((s) => s.trim())
+                  if (key && value) acc[key] = value
+                  return acc
+                }, {} as Record<string, string>)
+                const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                return localized[regionLang] || localized["en"] || title
+              }
+            })()}
           </Button>
         </div>
 
@@ -207,19 +247,50 @@ const Payment = ({
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
+                  {(() => {
+                    const title = "#en:Payment method#ar:طريقة الدفع"
+                    const localized = title.split("#").reduce((acc, part) => {
+                      const [key, value] = part.split(":").map((s) => s.trim())
+                      if (key && value) acc[key] = value
+                      return acc
+                    }, {} as Record<string, string>)
+                    const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                    return localized[regionLang] || localized["en"] || title
+                  })()}
                 </Text>
                 <Text
                   className="txt-medium text-ui-fg-subtle"
                   data-testid="payment-method-summary"
                 >
-                  {paymentInfoMap[activeSession?.provider_id]?.title ||
-                    activeSession?.provider_id}
+                  {(() => {
+                    const providerId = activeSession?.provider_id
+                    const info = paymentInfoMap[providerId]
+                    let title = info?.title || providerId
+                    if (title) {
+                      const localized = title.split("#").reduce((acc, part) => {
+                        const [key, value] = part.split(":").map((s) => s.trim())
+                        if (key && value) acc[key] = value
+                        return acc
+                      }, {} as Record<string, string>)
+                      const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                      return localized[regionLang] || localized["en"] || title
+                    }
+                    return title
+                  })()}
                 </Text>
               </div>
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
+                  {(() => {
+                    const title = "#en:Payment details#ar:تفاصيل الدفع"
+                    const localized = title.split("#").reduce((acc, part) => {
+                      const [key, value] = part.split(":").map((s) => s.trim())
+                      if (key && value) acc[key] = value
+                      return acc
+                    }, {} as Record<string, string>)
+                    const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                    return localized[regionLang] || localized["en"] || title
+                  })()}
                 </Text>
                 <div
                   className="flex gap-2 txt-medium text-ui-fg-subtle items-center"
@@ -247,7 +318,17 @@ const Payment = ({
                 className="txt-medium text-ui-fg-subtle"
                 data-testid="payment-method-summary"
               >
-                Gift card
+                {(() => {
+                  // For gift card summary
+                  const title = "Gift card"
+                  const localized = title.split("#").reduce((acc, part) => {
+                    const [key, value] = part.split(":").map((s) => s.trim())
+                    if (key && value) acc[key] = value
+                    return acc
+                  }, {} as Record<string, string>)
+                  const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                  return localized[regionLang] || localized["en"] || title
+                })()}
               </Text>
             </div>
           ) : null}

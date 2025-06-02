@@ -13,9 +13,10 @@ type PaymentButtonProps = {
   "data-testid": string
 }
 
-const PaymentButton: React.FC<PaymentButtonProps> = ({
+const PaymentButton: React.FC<PaymentButtonProps & { translations?: any }> = ({
   cart,
   "data-testid": dataTestId,
+  translations,
 }) => {
   const notReady =
     !cart ||
@@ -33,11 +34,12 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
           notReady={notReady}
           cart={cart}
           data-testid={dataTestId}
+          translations={translations}
         />
       )
     case isManual(paymentSession?.provider_id):
       return (
-        <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
+        <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} translations={translations} />
       )
     default:
       return <Button disabled>Select a payment method</Button>
@@ -48,10 +50,12 @@ const StripePaymentButton = ({
   cart,
   notReady,
   "data-testid": dataTestId,
+  translations,
 }: {
   cart: HttpTypes.StoreCart
   notReady: boolean
   "data-testid"?: string
+  translations?: any
 }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -141,7 +145,7 @@ const StripePaymentButton = ({
         isLoading={submitting}
         data-testid={dataTestId}
       >
-        Place order
+        {translations?.review?.placeOrder || "Place order"}
       </Button>
       <ErrorMessage
         error={errorMessage}
@@ -151,7 +155,7 @@ const StripePaymentButton = ({
   )
 }
 
-const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
+const ManualTestPaymentButton = ({ notReady, translations, "data-testid": dataTestId }: { notReady: boolean; translations?: any; "data-testid"?: string }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -178,9 +182,9 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
-        data-testid="submit-order-button"
+        data-testid={dataTestId || "submit-order-button"}
       >
-        Place order
+        {translations?.review?.placeOrder || "Place order"}
       </Button>
       <ErrorMessage
         error={errorMessage}

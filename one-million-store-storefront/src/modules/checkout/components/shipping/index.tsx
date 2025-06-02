@@ -19,9 +19,18 @@ const PICKUP_OPTION_OFF = "__PICKUP_OFF"
 type ShippingProps = {
   cart: HttpTypes.StoreCart
   availableShippingMethods: HttpTypes.StoreCartShippingOption[] | null
+  translations: any
 }
 
-function formatAddress(address) {
+function formatAddress(
+  address: {
+    address_1?: string
+    address_2?: string
+    postal_code?: string
+    city?: string
+    country_code?: string
+  } = {}
+) {
   if (!address) {
     return ""
   }
@@ -50,6 +59,7 @@ function formatAddress(address) {
 const Shipping: React.FC<ShippingProps> = ({
   cart,
   availableShippingMethods,
+  translations,
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingPrices, setIsLoadingPrices] = useState(true)
@@ -71,11 +81,11 @@ const Shipping: React.FC<ShippingProps> = ({
   const isOpen = searchParams.get("step") === "delivery"
 
   const _shippingMethods = availableShippingMethods?.filter(
-    (sm) => sm.service_zone?.fulfillment_set?.type !== "pickup"
+    (sm) => sm.type?.code !== "pickup"
   )
 
   const _pickupMethods = availableShippingMethods?.filter(
-    (sm) => sm.service_zone?.fulfillment_set?.type === "pickup"
+    (sm) => sm.type?.code === "pickup"
   )
 
   const hasPickupOptions = !!_pickupMethods?.length
@@ -161,7 +171,7 @@ const Shipping: React.FC<ShippingProps> = ({
             }
           )}
         >
-          Delivery
+          {translations?.shippingAddress?.delivery || "Delivery"}
           {!isOpen && (cart.shipping_methods?.length ?? 0) > 0 && (
             <CheckCircleSolid />
           )}
@@ -176,7 +186,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
                 data-testid="edit-delivery-button"
               >
-                Edit
+                {translations?.shippingAddress?.edit || "Edit"}
               </button>
             </Text>
           )}
@@ -186,10 +196,10 @@ const Shipping: React.FC<ShippingProps> = ({
           <div className="grid">
             <div className="flex flex-col">
               <span className="font-medium txt-medium text-ui-fg-base">
-                Shipping method
+                {translations?.shippingAddress?.shippingMethod || "Shipping method"}
               </span>
               <span className="mb-4 text-ui-fg-muted txt-medium">
-                How would you like you order delivered
+                {translations?.shippingAddress?.howToDeliver || "How would you like you order delivered"}
               </span>
             </div>
             <div data-testid="delivery-options-container">
@@ -233,8 +243,8 @@ const Shipping: React.FC<ShippingProps> = ({
                   </RadioGroup>
                 )}
                 <RadioGroup
-                  value={shippingMethodId}
-                  onChange={(v) => handleSetShippingMethod(v, "shipping")}
+                  value={shippingMethodId || ""}
+                  onChange={(v: string) => handleSetShippingMethod(v, "shipping")}
                 >
                   {_shippingMethods?.map((option) => {
                     const isDisabled =
@@ -263,7 +273,19 @@ const Shipping: React.FC<ShippingProps> = ({
                             checked={option.id === shippingMethodId}
                           />
                           <span className="text-base-regular">
-                            {option.name}
+                            {(() => {
+                              const localizedName = (option.name || "")
+                                .split("#")
+                                .reduce((acc, part) => {
+                                  const [key, value] = part.split(":").map((s) => s.trim())
+                                  if (key && value) acc[key] = value
+                                  return acc
+                                }, {} as Record<string, string>)
+                              const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
+                              return (
+                                localizedName[regionLang] || localizedName["en"] || option.name
+                              )
+                            })()}
                           </span>
                         </div>
                         <span className="justify-self-end text-ui-fg-base">
@@ -295,17 +317,17 @@ const Shipping: React.FC<ShippingProps> = ({
             <div className="grid">
               <div className="flex flex-col">
                 <span className="font-medium txt-medium text-ui-fg-base">
-                  Store
+                  {translations?.shippingAddress?.store || "Store"}
                 </span>
                 <span className="mb-4 text-ui-fg-muted txt-medium">
-                  Choose a store near you
+                  {translations?.shippingAddress?.chooseStore || "Choose a store near you"}
                 </span>
               </div>
               <div data-testid="delivery-options-container">
                 <div className="pb-8 md:pt-0 pt-2">
                   <RadioGroup
-                    value={shippingMethodId}
-                    onChange={(v) => handleSetShippingMethod(v, "pickup")}
+                    value={shippingMethodId || ""}
+                    onChange={(v: string) => handleSetShippingMethod(v, "pickup")}
                   >
                     {_pickupMethods?.map((option) => {
                       return (
@@ -333,10 +355,7 @@ const Shipping: React.FC<ShippingProps> = ({
                                 {option.name}
                               </span>
                               <span className="text-base-regular text-ui-fg-muted">
-                                {formatAddress(
-                                  option.service_zone?.fulfillment_set?.location
-                                    ?.address
-                                )}
+                                {formatAddress(option.location?.address)}
                               </span>
                             </div>
                           </div>
@@ -368,7 +387,7 @@ const Shipping: React.FC<ShippingProps> = ({
               disabled={!cart.shipping_methods?.[0]}
               data-testid="submit-delivery-option-button"
             >
-              Continue to payment
+              {translations?.shippingAddress?.continueToPayment || "Continue to payment"}
             </Button>
           </div>
         </>
@@ -378,11 +397,24 @@ const Shipping: React.FC<ShippingProps> = ({
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Method
+                  {translations?.shippingAddress?.method || "Method"}
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
-                  {cart.shipping_methods?.at(-1)?.name}{" "}
-                  {convertToLocale({
+                  {(() => {
+                    const selectedMethod = cart.shipping_methods?.at(-1);
+                    if (!selectedMethod) return "";
+                    const localizedName = (selectedMethod.name || "")
+                      .split("#")
+                      .reduce((acc, part) => {
+                        const [key, value] = part.split(":").map((s) => s.trim());
+                        if (key && value) acc[key] = value;
+                        return acc;
+                      }, {} as Record<string, string>);
+                    const regionLang = cart.region?.countries?.[0]?.iso_2 === "iq" ? "ar" : "en";
+                    return (
+                      localizedName[regionLang] || localizedName["en"] || selectedMethod.name
+                    );
+                  })()} {convertToLocale({
                     amount: cart.shipping_methods.at(-1)?.amount!,
                     currency_code: cart?.currency_code,
                   })}

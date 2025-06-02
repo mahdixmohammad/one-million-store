@@ -103,17 +103,13 @@ const Item = ({ item, type = "full", currencyCode, region }: ItemProps) => {
                   length: Math.min(maxQuantity, 10),
                 },
                 (_, i) => (
-                  <option value={i + 1} key={i}>
+                  <option value={i + 1} key={i + 1}>
                     {i + 1}
                   </option>
                 )
               )}
-
-              <option value={1} key={1}>
-                1
-              </option>
+              {updating && <Spinner />}
             </CartItemSelect>
-            {updating && <Spinner />}
           </div>
           <ErrorMessage error={error} data-testid="product-error-message" />
         </Table.Cell>
