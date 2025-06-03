@@ -6,13 +6,28 @@ import Divider from "@modules/common/components/divider"
 
 type ShippingDetailsProps = {
   order: HttpTypes.StoreOrder
+  translations?: any // Add translations prop
 }
 
-const ShippingDetails = ({ order }: ShippingDetailsProps) => {
+// Custom function to localize shipping method name using #en:#ar: split logic
+function getLocalizedShippingMethodName(name: string, translations: any) {
+  if (!name) return ""
+  // If name uses #en:...#ar:... split, use that
+  const localized = name.split("#").reduce((acc, part) => {
+    const [key, value] = part.split(":").map((s) => s.trim())
+    if (key && value) acc[key] = value
+    return acc
+  }, {} as Record<string, string>)
+  // Try to infer language from translations object
+  const lang = translations?.lang || (translations?.shippingAddress && translations.shippingAddress.country === "الدولة" ? "ar" : "en")
+  return localized[lang] || localized["en"] || name
+}
+
+const ShippingDetails = ({ order, translations }: ShippingDetailsProps) => {
   return (
     <div>
       <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
-        Delivery
+        {translations?.shippingAddress?.delivery || "Delivery"}
       </Heading>
       <div className="flex items-start gap-x-8">
         <div
@@ -20,19 +35,16 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
           data-testid="shipping-address-summary"
         >
           <Text className="txt-medium-plus text-ui-fg-base mb-1">
-            Shipping Address
+            {translations?.shippingAddress?.shippingAddress || "Shipping Address"}
           </Text>
           <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.first_name}{" "}
-            {order.shipping_address?.last_name}
+            {order.shipping_address?.first_name} {order.shipping_address?.last_name}
           </Text>
           <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.address_1}{" "}
-            {order.shipping_address?.address_2}
+            {order.shipping_address?.address_1} {order.shipping_address?.address_2}
           </Text>
           <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.postal_code},{" "}
-            {order.shipping_address?.city}
+            {order.shipping_address?.postal_code}, {order.shipping_address?.city}
           </Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {order.shipping_address?.country_code?.toUpperCase()}
@@ -43,7 +55,9 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
           className="flex flex-col w-1/3 "
           data-testid="shipping-contact-summary"
         >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Contact</Text>
+          <Text className="txt-medium-plus text-ui-fg-base mb-1">
+            {translations?.shippingAddress?.contact || "Contact"}
+          </Text>
           <Text className="txt-medium text-ui-fg-subtle">
             {order.shipping_address?.phone}
           </Text>
@@ -54,9 +68,11 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
           className="flex flex-col w-1/3"
           data-testid="shipping-method-summary"
         >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Method</Text>
+          <Text className="txt-medium-plus text-ui-fg-base mb-1">
+            {translations?.shippingAddress?.method || "Method"}
+          </Text>
           <Text className="txt-medium text-ui-fg-subtle">
-            {(order as any).shipping_methods[0]?.name} (
+            {getLocalizedShippingMethodName((order as any).shipping_methods[0]?.name, translations)} (
             {convertToLocale({
               amount: order.shipping_methods?.[0].total ?? 0,
               currency_code: order.currency_code,

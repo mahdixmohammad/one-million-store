@@ -16,7 +16,9 @@ export const metadata: Metadata = {
 
 export default async function OrderConfirmedPage(props: Props) {
   const params = await props.params
-  const order = await retrieveOrder(params.id).catch(() => null)
+  // Destructure countryCode from params (should be present in URL)
+  const { id, countryCode } = params as { id: string; countryCode: string }
+  const order = await retrieveOrder(id).catch(() => null)
 
   if (!order) {
     return notFound()
@@ -24,19 +26,11 @@ export default async function OrderConfirmedPage(props: Props) {
 
   const region = await retrieveRegion(order.region_id || "default-region-id")
 
-  // Load translations for order confirmation page
-  // Try to get countryCode from params or fallback to region/country
-  let countryCode = "en"
-  if (region && region.countries && region.countries[0]?.iso_2 === "iq") {
-    countryCode = "ar"
-  } else if (props.params && typeof props.params === "object" && "countryCode" in props.params) {
-    countryCode = (props.params as any).countryCode
-  }
+  // Use countryCode from params to determine locale
   const locale = countryCode === "iq" ? "ar" : "en"
   const filePath = path.join(process.cwd(), "public", "locales", locale, "common.json")
   const fileContents = await fs.readFile(filePath, "utf-8")
   const translations = JSON.parse(fileContents)
-  // Ensure all translation sections are present
   const orderTranslations = {
     ...translations,
     cartTotals: translations.cartTotals,

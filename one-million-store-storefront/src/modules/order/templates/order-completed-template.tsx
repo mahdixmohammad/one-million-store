@@ -44,15 +44,15 @@ export default async function OrderCompletedTemplate({
               }
             </span>
           </Heading>
-          <OrderDetails order={order} />
+          <OrderDetails order={order} translations={translations} />
           <Heading level="h2" className="flex flex-row text-3xl-regular">
             {translations?.cartSummary?.summary || "Summary"}
           </Heading>
           <Items order={order} region={region} />
           <CartTotals totals={order} translations={translations} />
-          <ShippingDetails order={order} />
-          <PaymentDetails order={order} />
-          <Help />
+          <ShippingDetails order={order} translations={translations} />
+          <PaymentDetails order={order} translations={translations} />
+          <Help translations={translations} />
         </div>
       </div>
     </div>

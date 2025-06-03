@@ -110,6 +110,18 @@
   },
   "orderComplete": {
     "thankYou": "Thank you!",
-    "successMessage": "Your order was placed successfully."
+    "successMessage": "Your order was placed successfully.",
+    "confirmationSent": "We have sent the order confirmation details to",
+    "orderDate": "Order date:",
+    "orderNumber": "Order number:",
+    "orderStatus": "Order status:",
+    "paymentStatus": "Payment status:",
+    "paymentHeading": "Payment",
+    "paymentMethod": "Payment method",
+    "paymentDetails": "Payment details",
+    "paidAt": "paid at",
+    "needHelp": "Need help?",
+    "contact": "Contact",
+    "returns": "Returns & Exchanges"
   }
 }

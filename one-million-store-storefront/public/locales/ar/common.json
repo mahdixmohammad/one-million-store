@@ -110,6 +110,18 @@
   },
   "orderComplete": {
     "thankYou": "شكرًا لك!",
-    "successMessage": "تم تقديم طلبك بنجاح."
+    "successMessage": "تم تقديم طلبك بنجاح.",
+    "confirmationSent": "تم إرسال تفاصيل تأكيد الطلب إلى",
+    "orderDate": ":تاريخ الطلب",
+    "orderNumber": ":رقم الطلب",
+    "orderStatus": ":حالة الطلب",
+    "paymentStatus": ":حالة الدفع",
+    "paymentHeading": "الدفع",
+    "paymentMethod": "طريقة الدفع",
+    "paymentDetails": "تفاصيل الدفع",
+    "paidAt": "تم الدفع في",
+    "needHelp": "هل تحتاج إلى مساعدة؟",
+    "contact": "تواصل معنا",
+    "returns": "الاسترجاع والاستبدال"
   }
 }
