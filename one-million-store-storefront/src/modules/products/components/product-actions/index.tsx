@@ -31,7 +31,8 @@ export default function ProductActions({
   product,
   disabled,
   region,
-}: ProductActionsProps) {
+  translations,
+}: ProductActionsProps & { translations: any }) {
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
   const countryCode = useParams().countryCode as string
@@ -121,6 +122,8 @@ export default function ProductActions({
           {(product.variants?.length ?? 0) > 1 && (
             <div className="flex flex-col gap-y-4">
               {(product.options || []).map((option) => {
+                // Determine regionLang for SSR-safe localization
+                const regionLang = region.countries?.[0]?.iso_2 === "iq" ? "ar" : "en"
                 return (
                   <div key={option.id}>
                     <OptionSelect
@@ -130,6 +133,7 @@ export default function ProductActions({
                       title={option.title ?? ""}
                       data-testid="product-options"
                       disabled={!!disabled || isAdding}
+                      regionLang={regionLang}
                     />
                   </div>
                 )
@@ -139,7 +143,7 @@ export default function ProductActions({
           )}
         </div>
 
-        <ProductPrice product={product} variant={selectedVariant} />
+        <ProductPrice product={product} variant={selectedVariant} translations={translations} />
 
         <Button
           onClick={handleAddToCart}
@@ -156,10 +160,10 @@ export default function ProductActions({
           data-testid="add-product-button"
         >
           {!selectedVariant && !options
-            ? "Select variant"
+            ? translations?.productActions?.selectVariant || "Select variant"
             : !inStock || !isValidVariant
-            ? "Out of stock"
-            : "Add to cart"}
+            ? translations?.productActions?.outOfStock || "Out of stock"
+            : translations?.productActions?.addToCart || "Add to cart"}
         </Button>
         <MobileActions
           product={product}
@@ -172,6 +176,7 @@ export default function ProductActions({
           show={!inView}
           optionsDisabled={!!disabled || isAdding}
           region={region}
+          translations={translations}
         />
       </div>
     </>

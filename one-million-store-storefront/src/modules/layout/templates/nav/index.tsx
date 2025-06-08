@@ -8,7 +8,7 @@ import SideMenu from "@modules/layout/components/side-menu"
 import Image from "next/image"
 import RegionDropdown from "@modules/layout/components/region-dropdown"
 
-export default async function Nav({ translations, countryCode }: { translations: {sideMenu: {home: string; store: string; account: string; cart: string}}, countryCode: string }) {
+export default async function Nav({ translations, countryCode }: { translations: any; countryCode: string }) {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions);
 
   return (
@@ -53,7 +53,7 @@ export default async function Nav({ translations, countryCode }: { translations:
                 </LocalizedClientLink>
               }
             >
-              <CartButton />
+              <CartButton translations={translations} />
             </Suspense>
           </div>
         </nav>

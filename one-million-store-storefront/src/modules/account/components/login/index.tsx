@@ -7,9 +7,10 @@ import { useActionState } from "react"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
+  translations: any
 }
 
-const Login = ({ setCurrentView }: Props) => {
+const Login = ({ setCurrentView, translations }: Props) => {
   const [message, formAction] = useActionState(login, null)
 
   return (
@@ -17,23 +18,26 @@ const Login = ({ setCurrentView }: Props) => {
       className="max-w-sm w-full flex flex-col items-center"
       data-testid="login-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
+      <h1 className="text-large-semi uppercase mb-6">
+        {translations?.login?.welcome || "Welcome back"}
+      </h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Sign in to access an enhanced shopping experience.
+        {translations?.login?.signInMessage ||
+          "Sign in to access an enhanced shopping experience."}
       </p>
-      <form className="w-full" action={formAction}>
+      <form dir="ltr" className="w-full" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="Email"
+            label={translations?.login?.email || "Email"}
             name="email"
             type="email"
-            title="Enter a valid email address."
+            title={translations?.login?.emailTitle || "Enter a valid email address."}
             autoComplete="email"
             required
             data-testid="email-input"
           />
           <Input
-            label="Password"
+            label={translations?.login?.password || "Password"}
             name="password"
             type="password"
             autoComplete="current-password"
@@ -43,17 +47,17 @@ const Login = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
         <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
-          Sign in
+          {translations?.login?.signInButton || "Sign in"}
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Not a member?{" "}
+        {translations?.login?.notMember || "Not a member?"}{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
           data-testid="register-button"
         >
-          Join us
+          {translations?.login?.joinUs || "Join us"}
         </button>
         .
       </span>

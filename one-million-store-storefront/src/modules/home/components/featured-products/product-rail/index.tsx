@@ -10,7 +10,7 @@ export default async function ProductRail({
   collection,
   region,
 }: {
-  translations: {featuredProducts: {heading: string, viewAll: string}},
+  translations: any, // Accept the full translations object
   collection: HttpTypes.StoreCollection
   region: HttpTypes.StoreRegion
 }) {
@@ -42,7 +42,7 @@ export default async function ProductRail({
         {pricedProducts &&
           pricedProducts.map((product) => (
             <li key={product.id}>
-              <ProductPreview product={product} region={region} isFeatured />
+              <ProductPreview product={product} region={region} translations={translations} />
             </li>
           ))}
       </ul>

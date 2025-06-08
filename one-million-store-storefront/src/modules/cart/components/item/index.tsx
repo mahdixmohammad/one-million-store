@@ -19,9 +19,10 @@ type ItemProps = {
   type?: "full" | "preview"
   currencyCode: string
   region: HttpTypes.StoreRegion
+  translations?: any // Add translations prop
 }
 
-const Item = ({ item, type = "full", currencyCode, region }: ItemProps) => {
+const Item = ({ item, type = "full", currencyCode, region, translations }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -84,7 +85,7 @@ const Item = ({ item, type = "full", currencyCode, region }: ItemProps) => {
         >
           {title}
         </Text>
-        <LineItemOptions variant={item.variant} data-testid="product-variant" />
+        <LineItemOptions variant={item.variant} translations={translations} data-testid="product-variant" />
       </Table.Cell>
 
       {type === "full" && (

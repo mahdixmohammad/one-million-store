@@ -123,5 +123,78 @@
     "needHelp": "هل تحتاج إلى مساعدة؟",
     "contact": "تواصل معنا",
     "returns": "الاسترجاع والاستبدال"
+  },
+  "storePage": {
+    "allProducts": "جميع المنتجات"
+  },
+  "sortProducts": {
+    "sortBy": "ترتيب حسب",
+    "latestArrivals": "الأحدث",
+    "priceLowHigh": "السعر: من الأقل إلى الأعلى",
+    "priceHighLow": "السعر: من الأعلى إلى الأقل"
+  },
+  "login": {
+    "welcome": "مرحبًا بعودتك",
+    "signInMessage": "سجّل الدخول لتحصل على تجربة تسوق أفضل.",
+    "email": "البريد الإلكتروني",
+    "emailTitle": "أدخل بريدًا إلكترونيًا صالحًا.",
+    "password": "كلمة المرور",
+    "signInButton": "تسجيل الدخول",
+    "notMember": "لست عضوًا؟",
+    "joinUs": "انضم إلينا"
+  },
+  "register": {
+    "heading": "انضم إلى أعضاء متجر ون مليون",
+    "message": "أنشئ ملف عضويتك في متجر ون مليون، واحصل على تجربة تسوق محسّنة.",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "termsPrefix": "بإنشائك حسابًا، فإنك توافق على",
+    "privacyPolicy": "سياسة الخصوصية",
+    "and": "و",
+    "termsOfUse": "شروط الاستخدام",
+    "joinButton": "انضم",
+    "alreadyMember": "هل أنت عضو بالفعل؟",
+    "signIn": "تسجيل الدخول"
+  },
+  "productActions": {
+    "selectVariant": "اختر النوع",
+    "outOfStock": "غير متوفر في المخزون",
+    "addToCart": "أضف إلى السلة"
+  },
+  "productPrice": {
+    "from": "من ",
+    "original": "السعر الأصلي: "
+  },
+  "relatedProducts": {
+    "heading": "منتجات ذات صلة",
+    "message": "قد ترغب أيضًا في الاطلاع على هذه المنتجات."
+  },
+  "cartDropdown": {
+    "cart": "عربة التسوق",
+    "goToCart": "اذهب إلى العربة",
+    "empty": "سلة التسوق الخاصة بك فارغة.",
+    "exploreProducts": "تسوق المنتجات",
+    "subtotal": "المجموع الفرعي",
+    "exclTaxes": "(بدون الضرائب)",
+    "quantity": "الكمية",
+    "variant": ":النوع",
+    "remove": "إزالة"
+  },
+  "footer": {
+    "shop": "تسوق",
+    "support": "الدعم",
+    "contact": "اتصل بنا",
+    "privacy": "سياسة الخصوصية",
+    "delivery": "سياسة التوصيل",
+    "returns": "سياسة الإرجاع",
+    "rights": "شركة خليج المستقبل. جميع الحقوق محفوظة."
+  },
+  "account": {
+    "gotQuestions": "هل لديك أسئلة؟",
+    "faqPrompt": "يمكنك العثور على الأسئلة الشائعة وإجاباتها في صفحة خدمة العملاء الخاصة بنا.",
+    "customerService": "خدمة العملاء"
   }
 }

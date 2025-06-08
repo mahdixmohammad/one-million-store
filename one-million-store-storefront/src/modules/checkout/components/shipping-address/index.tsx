@@ -195,7 +195,7 @@ const ShippingAddress = ({
           data-testid="shipping-city-input"
         />
         <CountrySelect
-          dir={addressTranslations.shippingAddress.country === "الدولة" ? "rtl" : "ltr"}
+          dir="ltr"
           name="shipping_address.country_code"
           autoComplete="country"
           region={cart?.region}

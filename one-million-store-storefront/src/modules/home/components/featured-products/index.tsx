@@ -6,7 +6,7 @@ export default async function FeaturedProducts({
   collections,
   region,
 }: {
-  translations: {featuredProducts: {heading: string, viewAll: string}},
+  translations: any, // Accept the full translations object
   collections: HttpTypes.StoreCollection[]
   region: HttpTypes.StoreRegion
 }) {

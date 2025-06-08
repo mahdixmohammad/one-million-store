@@ -10,9 +10,10 @@ import { signup } from "@lib/data/customer"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
+  translations: any
 }
 
-const Register = ({ setCurrentView }: Props) => {
+const Register = ({ setCurrentView, translations }: Props) => {
   const [message, formAction] = useActionState(signup, null)
 
   return (
@@ -21,30 +22,30 @@ const Register = ({ setCurrentView }: Props) => {
       data-testid="register-page"
     >
       <h1 className="text-large-semi uppercase mb-6">
-        Become a Medusa Store Member
+        {translations?.register?.heading || "Become a Medusa Store Member"}
       </h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-4">
-        Create your Medusa Store Member profile, and get access to an enhanced
-        shopping experience.
+        {translations?.register?.message ||
+          "Create your Medusa Store Member profile, and get access to an enhanced shopping experience."}
       </p>
-      <form className="w-full flex flex-col" action={formAction}>
+      <form dir="ltr" className="w-full flex flex-col" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="First name"
+            label={translations?.register?.firstName || "First name"}
             name="first_name"
             required
             autoComplete="given-name"
             data-testid="first-name-input"
           />
           <Input
-            label="Last name"
+            label={translations?.register?.lastName || "Last name"}
             name="last_name"
             required
             autoComplete="family-name"
             data-testid="last-name-input"
           />
           <Input
-            label="Email"
+            label={translations?.register?.email || "Email"}
             name="email"
             required
             type="email"
@@ -52,14 +53,14 @@ const Register = ({ setCurrentView }: Props) => {
             data-testid="email-input"
           />
           <Input
-            label="Phone"
+            label={translations?.register?.phone || "Phone"}
             name="phone"
             type="tel"
             autoComplete="tel"
             data-testid="phone-input"
           />
           <Input
-            label="Password"
+            label={translations?.register?.password || "Password"}
             name="password"
             required
             type="password"
@@ -69,33 +70,34 @@ const Register = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} data-testid="register-error" />
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
-          By creating an account, you agree to Medusa Store&apos;s{" "}
+          {translations?.register?.termsPrefix ||
+            "By creating an account, you agree to Medusa Store's"}{" "}
           <LocalizedClientLink
             href="/content/privacy-policy"
             className="underline"
           >
-            Privacy Policy
+            {translations?.register?.privacyPolicy || "Privacy Policy"}
           </LocalizedClientLink>{" "}
-          and{" "}
+          {translations?.register?.and || "and"}{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
             className="underline"
           >
-            Terms of Use
+            {translations?.register?.termsOfUse || "Terms of Use"}
           </LocalizedClientLink>
           .
         </span>
         <SubmitButton className="w-full mt-6" data-testid="register-button">
-          Join
+          {translations?.register?.joinButton || "Join"}
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Already a member?{" "}
+        {translations?.register?.alreadyMember || "Already a member?"}{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"
         >
-          Sign in
+          {translations?.register?.signIn || "Sign in"}
         </button>
         .
       </span>

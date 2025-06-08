@@ -1,4 +1,6 @@
 import React from "react"
+import path from "path"
+import fs from "fs/promises"
 
 import UnderlineLink from "@modules/common/components/interactive-link"
 
@@ -8,12 +10,28 @@ import { HttpTypes } from "@medusajs/types"
 interface AccountLayoutProps {
   customer: HttpTypes.StoreCustomer | null
   children: React.ReactNode
+  countryCode?: string
 }
 
-const AccountLayout: React.FC<AccountLayoutProps> = ({
+async function loadTranslations(locale: string) {
+  const filePath = path.join(
+    process.cwd(),
+    "public",
+    "locales",
+    locale,
+    "common.json"
+  )
+  const fileContents = await fs.readFile(filePath, "utf-8")
+  return JSON.parse(fileContents)
+}
+
+const AccountLayout = async ({
   customer,
   children,
-}) => {
+  countryCode = "us",
+}: AccountLayoutProps) => {
+  const locale = countryCode === "iq" ? "ar" : "en"
+  const translations = await loadTranslations(locale)
   return (
     <div className="flex-1 small:py-12" data-testid="account-page">
       <div className="flex-1 content-container h-full max-w-5xl mx-auto bg-white flex flex-col">
@@ -23,15 +41,17 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
         </div>
         <div className="flex flex-col small:flex-row items-end justify-between small:border-t border-gray-200 py-12 gap-8">
           <div>
-            <h3 className="text-xl-semi mb-4">Got questions?</h3>
+            <h3 className="text-xl-semi mb-4">
+              {translations.account?.gotQuestions || "Got questions?"}
+            </h3>
             <span className="txt-medium">
-              You can find frequently asked questions and answers on our
-              customer service page.
+              {translations.account?.faqPrompt ||
+                "You can find frequently asked questions and answers on our customer service page."}
             </span>
           </div>
           <div>
             <UnderlineLink href="/customer-service">
-              Customer Service
+              {translations.account?.customerService || "Customer Service"}
             </UnderlineLink>
           </div>
         </div>

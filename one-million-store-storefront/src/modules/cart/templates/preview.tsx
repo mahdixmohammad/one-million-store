@@ -10,9 +10,10 @@ import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item"
 type ItemsTemplateProps = {
   cart: HttpTypes.StoreCart
   region: HttpTypes.StoreRegion
+  translations?: any // Add translations prop
 }
 
-const ItemsPreviewTemplate = ({ cart, region }: ItemsTemplateProps) => {
+const ItemsPreviewTemplate = ({ cart, region, translations }: ItemsTemplateProps) => {
   const items = cart.items
   const hasOverflow = items && items.length > 4
 
@@ -38,6 +39,7 @@ const ItemsPreviewTemplate = ({ cart, region }: ItemsTemplateProps) => {
                       type="preview"
                       currencyCode={cart.currency_code}
                       region={region}
+                      translations={translations}
                     />
                   )
                 })

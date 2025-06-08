@@ -22,6 +22,7 @@ type MobileActionsProps = {
   show: boolean
   optionsDisabled: boolean
   region: HttpTypes.StoreRegion
+  translations: any
 }
 
 const MobileActions: React.FC<MobileActionsProps> = ({
@@ -35,6 +36,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   show,
   optionsDisabled,
   region,
+  translations,
 }) => {
   const { state, open, close } = useToggleState()
 
@@ -140,10 +142,10 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 data-testid="mobile-cart-button"
               >
                 {!variant
-                  ? "Select variant"
+                  ? translations?.productActions?.selectVariant || "Select variant"
                   : !inStock
-                  ? "Out of stock"
-                  : "Add to cart"}
+                  ? translations?.productActions?.outOfStock || "Out of stock"
+                  : translations?.productActions?.addToCart || "Add to cart"}
               </Button>
             </div>
           </div>

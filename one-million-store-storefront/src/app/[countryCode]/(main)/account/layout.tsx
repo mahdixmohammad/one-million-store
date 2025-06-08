@@ -5,14 +5,17 @@ import AccountLayout from "@modules/account/templates/account-layout"
 export default async function AccountPageLayout({
   dashboard,
   login,
+  params,
 }: {
   dashboard?: React.ReactNode
   login?: React.ReactNode
+  params: { countryCode: string }
 }) {
   const customer = await retrieveCustomer().catch(() => null)
+  const countryCode = params?.countryCode || "us"
 
   return (
-    <AccountLayout customer={customer}>
+    <AccountLayout customer={customer} countryCode={countryCode}>
       {customer ? dashboard : login}
       <Toaster />
     </AccountLayout>

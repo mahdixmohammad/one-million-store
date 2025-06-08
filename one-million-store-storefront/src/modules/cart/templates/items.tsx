@@ -55,6 +55,7 @@ const ItemsTemplate = ({ cart, region, translations }: ItemsTemplateProps) => {
                       item={item}
                       currencyCode={cart?.currency_code}
                       region={region}
+                      translations={translations}
                     />
                   )
                 })

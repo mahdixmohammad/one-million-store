@@ -123,5 +123,78 @@
     "needHelp": "Need help?",
     "contact": "Contact",
     "returns": "Returns & Exchanges"
+  },
+  "storePage": {
+    "allProducts": "All products"
+  },
+  "sortProducts": {
+    "sortBy": "Sort by",
+    "latestArrivals": "Latest Arrivals",
+    "priceLowHigh": "Price: Low -> High",
+    "priceHighLow": "Price: High -> Low"
+  },
+  "login": {
+    "welcome": "Welcome back",
+    "signInMessage": "Sign in to access an enhanced shopping experience.",
+    "email": "Email",
+    "emailTitle": "Enter a valid email address.",
+    "password": "Password",
+    "signInButton": "Sign in",
+    "notMember": "Not a member?",
+    "joinUs": "Join us"
+  },
+  "register": {
+    "heading": "Become a Medusa Store Member",
+    "message": "Create your Medusa Store Member profile, and get access to an enhanced shopping experience.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "termsPrefix": "By creating an account, you agree to Medusa Store's",
+    "privacyPolicy": "Privacy Policy",
+    "and": "and",
+    "termsOfUse": "Terms of Use",
+    "joinButton": "Join",
+    "alreadyMember": "Already a member?",
+    "signIn": "Sign in"
+  },
+  "productActions": {
+    "selectVariant": "Select variant",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to cart"
+  },
+  "productPrice": {
+    "from": "From ",
+    "original": "Original: "
+  },
+  "relatedProducts": {
+    "heading": "Related products",
+    "message": "You might also want to check out these products."
+  },
+  "cartDropdown": {
+    "cart": "Cart",
+    "goToCart": "Go to cart",
+    "empty": "Your shopping bag is empty.",
+    "exploreProducts": "Explore products",
+    "subtotal": "Subtotal",
+    "exclTaxes": "(excl. taxes)",
+    "quantity": "Quantity",
+    "variant": "Variant:",
+    "remove": "Remove"
+  },
+  "footer": {
+    "shop": "SHOP",
+    "support": "SUPPORT",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "delivery": "Delivery Policy",
+    "returns": "Return Policy",
+    "rights": "Future Gulf Company. All rights reserved."
+  },
+  "account": {
+    "gotQuestions": "Got questions?",
+    "faqPrompt": "You can find frequently asked questions and answers on our customer service page.",
+    "customerService": "Customer Service"
   }
 }

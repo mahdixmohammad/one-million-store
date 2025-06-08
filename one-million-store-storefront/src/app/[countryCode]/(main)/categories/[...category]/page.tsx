@@ -42,17 +42,27 @@ export async function generateStaticParams() {
   return staticParams
 }
 
+// Helper for localized category names
+function getLocalizedCategoryName(name: string, locale: string) {
+  const localized = name.split("#").reduce((acc, part) => {
+    const [key, value] = part.split(":").map((s) => s.trim())
+    if (key && value) acc[key] = value
+    return acc
+  }, {} as Record<string, string>)
+  return localized[locale] || localized["en"] || name
+}
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
   try {
     const productCategory = await getCategoryByHandle(params.category)
-
-    const title = productCategory.name + " | Medusa Store"
-
+    const countryCode = params.countryCode
+    const locale = countryCode === "iq" ? "ar" : "en"
+    const localizedCategoryName = getLocalizedCategoryName(productCategory.name, locale)
+    const title = localizedCategoryName + " | 1Million"
     const description = productCategory.description ?? `${title} category.`
-
     return {
-      title: `${title} | Medusa Store`,
+      title: `${title} | 1Million`,
       description,
       alternates: {
         canonical: `${params.category.join("/")}`,
@@ -67,19 +77,22 @@ export default async function CategoryPage(props: Props) {
   const searchParams = await props.searchParams
   const params = await props.params
   const { sortBy, page } = searchParams
-
   const productCategory = await getCategoryByHandle(params.category)
-
   if (!productCategory) {
     notFound()
   }
-
+  const countryCode = params.countryCode
+  const locale = countryCode === "iq" ? "ar" : "en"
+  const localizedCategory = {
+    ...productCategory,
+    name: getLocalizedCategoryName(productCategory.name, locale),
+  }
   return (
     <CategoryTemplate
-      category={productCategory}
+      category={localizedCategory}
       sortBy={sortBy}
       page={page}
-      countryCode={params.countryCode}
+      countryCode={countryCode}
     />
   )
 }

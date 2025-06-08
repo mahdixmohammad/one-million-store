@@ -49,7 +49,7 @@ const CheckoutSummary = async ({
         </Heading>
         <Divider className="my-6" />
         <CartTotals totals={cart} translations={checkoutTranslations} />
-        <ItemsPreviewTemplate cart={cart} region={region} />
+        <ItemsPreviewTemplate cart={cart} region={region} translations={checkoutTranslations} />
         <div className="my-6">
           <DiscountCode cart={cart} translations={checkoutTranslations} />
         </div>
