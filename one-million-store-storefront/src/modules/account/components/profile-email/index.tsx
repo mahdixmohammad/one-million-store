@@ -10,9 +10,10 @@ import { HttpTypes } from "@medusajs/types"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
+  translations: any
 }
 
-const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
+const ProfileEmail: React.FC<MyInformationProps> = ({ customer, translations }) => {
   const [successState, setSuccessState] = React.useState(false)
 
   // TODO: It seems we don't support updating emails now?
@@ -48,17 +49,18 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   return (
     <form action={formAction} className="w-full">
       <AccountInfo
-        label="Email"
+        label={translations?.accountNav?.email || "Email"}
         currentInfo={`${customer.email}`}
         isSuccess={successState}
         isError={!!state.error}
         errorMessage={state.error}
         clearState={clearState}
         data-testid="account-email-editor"
+        translations={translations}
       >
         <div className="grid grid-cols-1 gap-y-2">
           <Input
-            label="Email"
+            label={translations?.accountNav?.email || "Email"}
             name="email"
             type="email"
             autoComplete="email"

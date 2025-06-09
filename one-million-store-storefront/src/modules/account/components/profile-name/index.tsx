@@ -10,9 +10,10 @@ import { updateCustomer } from "@lib/data/customer"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
+  translations: any
 }
 
-const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
+const ProfileName: React.FC<MyInformationProps> = ({ customer, translations }) => {
   const [successState, setSuccessState] = React.useState(false)
 
   const updateCustomerName = async (
@@ -48,23 +49,24 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   return (
     <form action={formAction} className="w-full overflow-visible">
       <AccountInfo
-        label="Name"
+        label={translations?.accountNav?.profileName || "Name"}
         currentInfo={`${customer.first_name} ${customer.last_name}`}
         isSuccess={successState}
         isError={!!state?.error}
         clearState={clearState}
         data-testid="account-name-editor"
+        translations={translations}
       >
         <div className="grid grid-cols-2 gap-x-4">
           <Input
-            label="First name"
+            label={translations?.accountNav?.firstName || "First name"}
             name="first_name"
             required
             defaultValue={customer.first_name ?? ""}
             data-testid="first-name-input"
           />
           <Input
-            label="Last name"
+            label={translations?.accountNav?.lastName || "Last name"}
             name="last_name"
             required
             defaultValue={customer.last_name ?? ""}

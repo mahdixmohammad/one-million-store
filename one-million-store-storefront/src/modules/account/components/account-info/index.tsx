@@ -13,6 +13,7 @@ type AccountInfoProps = {
   errorMessage?: string
   clearState: () => void
   children?: React.ReactNode
+  translations?: any
   'data-testid'?: string
 }
 
@@ -24,6 +25,7 @@ const AccountInfo = ({
   clearState,
   errorMessage = "An error occurred, please try again",
   children,
+  translations,
   'data-testid': dataTestid
 }: AccountInfoProps) => {
   const { state, close, toggle } = useToggleState()
@@ -63,7 +65,7 @@ const AccountInfo = ({
             data-testid="edit-button"
             data-active={state}
           >
-            {state ? "Cancel" : "Edit"}
+            {state ? (translations?.accountInfo?.cancel || translations?.cancel || "Cancel") : (translations?.accountInfo?.edit || translations?.edit || "Edit")}
           </Button>
         </div>
       </div>
@@ -82,7 +84,7 @@ const AccountInfo = ({
           data-testid="success-message"
         >
           <Badge className="p-2 my-4" color="green">
-            <span>{label} updated succesfully</span>
+            <span>{label} {translations?.accountInfo?.updatedSuccessfully || "updated successfully"}</span>
           </Badge>
         </Disclosure.Panel>
       </Disclosure>
@@ -101,7 +103,7 @@ const AccountInfo = ({
           data-testid="error-message"
         >
           <Badge className="p-2 my-4" color="red">
-            <span>{errorMessage}</span>
+            <span>{errorMessage || translations?.accountInfo?.errorMessage || "An error occurred, please try again"}</span>
           </Badge>
         </Disclosure.Panel>
       </Disclosure>
@@ -126,7 +128,7 @@ const AccountInfo = ({
                 type="submit"
                 data-testid="save-button"
               >
-                Save changes
+                {translations?.accountInfo?.saveChanges || "Save changes"}
               </Button>
             </div>
           </div>

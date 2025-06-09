@@ -195,6 +195,69 @@
   "account": {
     "gotQuestions": "Got questions?",
     "faqPrompt": "You can find frequently asked questions and answers on our customer service page.",
-    "customerService": "Customer Service"
+    "customerService": "Customer Service",
+    "profileDescription": "View and update your profile information, including your name, email, and phone number. You can also update your billing address, or change your password.",
+    "addressesDescription": "View and update your shipping addresses, you can add as many as you like. Saving your addresses will make them available during checkout.",
+    "ordersDescription": "View your previous orders and their status. You can also create returns or exchanges for your orders if needed."
+  },
+  "accountNav": {
+    "account": "Account",
+    "hello": "Hello",
+    "profile": "Profile",
+    "addresses": "Addresses",
+    "orders": "Orders",
+    "logout": "Log out",
+    "overview": "Overview",
+    "profileName": "Name",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "billingAddress": "Billing address",
+    "company": "Company",
+    "address1": "Address",
+    "address2": "Apartment, suite, etc.",
+    "postalCode": "Postal code",
+    "city": "City",
+    "province": "Province",
+    "newAddress": "New address",
+    "addAddress": "Add address"
+  },
+  "accountOverview": {
+    "hello": "Hello",
+    "signedInAs": "Signed in as:",
+    "profile": "Profile",
+    "completed": "Completed",
+    "addresses": "Addresses",
+    "saved": "Saved",
+    "recentOrders": "Recent orders",
+    "datePlaced": "Date placed",
+    "orderNumber": "Order number",
+    "totalAmount": "Total amount",
+    "goToOrder": "Go to order",
+    "noRecentOrders": "No recent orders"
+  },
+  "accountInfo": {
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "saveChanges": "Save changes",
+    "updatedSuccessfully": "updated successfully",
+    "errorMessage": "An error occurred, please try again",
+    "noBillingAddress": "No billing address"
+  },
+  "orders": {
+    "nothingToSeeHere": "Nothing to see here",
+    "noOrdersYet": "You don't have any orders yet, let us change that :)",
+    "continueShopping": "Continue shopping"
+  },
+  "transfer": {
+    "orderTransfers": "Order transfers",
+    "cantFindOrder": "Can't find the order you are looking for?",
+    "connectOrder": "Connect an order to your account.",
+    "orderIdPlaceholder": "Order ID",
+    "requestTransfer": "Request transfer",
+    "transferRequested": "Transfer for order",
+    "requested": "requested",
+    "emailSent": "Transfer request email sent to"
   }
 }

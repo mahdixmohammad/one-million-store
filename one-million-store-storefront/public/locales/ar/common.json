@@ -195,6 +195,69 @@
   "account": {
     "gotQuestions": "هل لديك أسئلة؟",
     "faqPrompt": "يمكنك العثور على الأسئلة الشائعة وإجاباتها في صفحة خدمة العملاء الخاصة بنا.",
-    "customerService": "خدمة العملاء"
+    "customerService": "خدمة العملاء",
+    "profileDescription": "قم بعرض وتحديث معلومات ملفك الشخصي، بما في ذلك اسمك، بريدك الإلكتروني، ورقم هاتفك. يمكنك أيضًا تحديث عنوان الفاتورة أو تغيير كلمة المرور.",
+    "addressesDescription": "قم بعرض وتحديث عناوين الشحن الخاصة بك، يمكنك إضافة أي عدد تريده من العناوين. حفظ العناوين سيجعلها متاحة أثناء الدفع.",
+    "ordersDescription": "اعرض طلباتك السابقة وحالتها. يمكنك أيضًا إنشاء طلبات إرجاع أو استبدال إذا لزم الأمر."
+  },
+  "accountNav": {
+    "account": "الحساب",
+    "hello": "مرحباً",
+    "profile": "الملف الشخصي",
+    "addresses": "العناوين",
+    "orders": "الطلبات",
+    "logout": "تسجيل الخروج",
+    "overview": "نظرة عامة",
+    "profileName": "الاسم",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "billingAddress": "عنوان الفاتورة",
+    "company": "الشركة",
+    "address1": "العنوان",
+    "address2": "شقة، جناح، إلخ.",
+    "postalCode": "الرمز البريدي",
+    "city": "المدينة",
+    "province": "المنطقة / المحافظة",
+    "newAddress": "عنوان جديد",
+    "addAddress": "إضافة عنوان"
+  },
+  "accountOverview": {
+    "hello": "مرحباً",
+    "signedInAs": ":تم تسجيل الدخول باسم",
+    "profile": "الملف الشخصي",
+    "completed": "مكتمل",
+    "addresses": "العناوين",
+    "saved": "محفوظ",
+    "recentOrders": "الطلبات الأخيرة",
+    "datePlaced": "تاريخ الطلب",
+    "orderNumber": "رقم الطلب",
+    "totalAmount": "المبلغ الإجمالي",
+    "goToOrder": "اذهب إلى الطلب",
+    "noRecentOrders": "لا توجد طلبات حديثة"
+  },
+  "accountInfo": {
+    "edit": "تعديل",
+    "cancel": "إلغاء",
+    "saveChanges": "حفظ التغييرات",
+    "updatedSuccessfully": "تم التحديث بنجاح",
+    "errorMessage": "حدث خطأ، يرجى المحاولة مرة أخرى",
+    "noBillingAddress": "لا يوجد عنوان فاتورة"
+  },
+  "orders": {
+    "nothingToSeeHere": "لا يوجد شيء هنا",
+    "noOrdersYet": "ليس لديك أي طلبات بعد، دعنا نغير ذلك :)",
+    "continueShopping": "متابعة التسوق"
+  },
+  "transfer": {
+    "orderTransfers": "تحويل الطلبات",
+    "cantFindOrder": "لا يمكنك العثور على الطلب الذي تبحث عنه؟",
+    "connectOrder": "قم بربط طلب بحسابك.",
+    "orderIdPlaceholder": "رقم الطلب",
+    "requestTransfer": "طلب تحويل",
+    "transferRequested": "تم طلب تحويل للطلب",
+    "requested": "تم الطلب",
+    "emailSent": "تم إرسال بريد طلب التحويل إلى"
   }
 }
