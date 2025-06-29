@@ -29,7 +29,6 @@ export default function PreviewPrice({
         })}
         data-testid="price"
       >
-        {price.price_type !== "sale" && (translations?.productPrice?.from || "From ")}
         {price.calculated_price}
       </Text>
     </>

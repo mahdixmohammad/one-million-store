@@ -121,10 +121,7 @@ export async function middleware(request: NextRequest) {
 
   // if one of the country codes is in the url and the cache id is set, return next
   if (urlHasCountryCode && cacheIdCookie) {
-    const locale = countryCode === "iq" ? "ar" : "en"
-    const url = request.nextUrl.clone()
-    url.searchParams.set("locale", locale)
-    return NextResponse.rewrite(url)
+    return NextResponse.next()
   }
 
   // if one of the country codes is in the url and the cache id is not set, set the cache id and redirect
@@ -150,12 +147,6 @@ export async function middleware(request: NextRequest) {
   if (!urlHasCountryCode && countryCode) {
     redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
     response = NextResponse.redirect(`${redirectUrl}`, 307)
-  }
-
-  // Redirect from root domain to /iq if no country code is present in the URL
-  if (request.nextUrl.pathname === "/") {
-    redirectUrl = `${request.nextUrl.origin}/iq`
-    return NextResponse.redirect(redirectUrl, 307)
   }
 
   return response
